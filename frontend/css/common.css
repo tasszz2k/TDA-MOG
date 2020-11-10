@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  src: url("../font/nunito-regular.woff"); /* IE9 Compat Modes */
+}
+
+* {
+  font-family: "Nunito";
+  box-sizing: border-box;
+}
