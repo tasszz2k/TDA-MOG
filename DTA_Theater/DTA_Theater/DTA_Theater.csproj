@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,20 +61,6 @@
     <Compile Include="dal\SeatDAO.cs" />
     <Compile Include="entity\Row_classification.cs" />
     <Compile Include="entity\Seat.cs" />
-    <Compile Include="Server\obj\Debug\.NETFramework,Version=v4.6.1.AssemblyAttributes.cs" />
-    <Compile Include="Server\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="Server\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="Server\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="Server\Program.cs" />
-    <Compile Include="Server\Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\Properties\Resources.Designer.cs" />
-    <Compile Include="Server\Properties\Settings.Designer.cs" />
-    <Compile Include="Server\ServerChat.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Server\ServerChat.Designer.cs">
-      <DependentUpon>ServerChat.cs</DependentUpon>
-    </Compile>
     <Compile Include="view\DemoAdminFormDTA.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,13 +87,6 @@
     </Compile>
     <Compile Include="entity\Auditorium.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Server\obj\Debug\Server.Properties.Resources.resources" />
-    <EmbeddedResource Include="Server\obj\Debug\Server.ServerChat.resources" />
-    <EmbeddedResource Include="Server\Properties\Resources.resx" />
-    <EmbeddedResource Include="Server\ServerChat.resx">
-      <DependentUpon>ServerChat.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="view\DemoAdminFormDTA.resx">
       <DependentUpon>DemoAdminFormDTA.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,6 +107,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -138,30 +119,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Server\App.config" />
-    <None Include="Server\bin\Debug\Server.exe.config" />
-    <None Include="Server\obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
-    <None Include="Server\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="Server\obj\Debug\Server.csproj.CoreCompileInputs.cache" />
-    <None Include="Server\obj\Debug\Server.csproj.GenerateResource.cache" />
-    <None Include="Server\obj\Debug\Server.csprojAssemblyReference.cache" />
-    <None Include="Server\Properties\Settings.settings" />
-    <None Include="Server\Server.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="images\" />
-    <Folder Include="Server\bin\Release\" />
-    <Folder Include="Server\obj\Debug\TempPE\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Server\bin\Debug\Server.exe" />
-    <Content Include="Server\bin\Debug\Server.pdb" />
-    <Content Include="Server\obj\Debug\Server.csproj.FileListAbsolute.txt" />
-    <Content Include="Server\obj\Debug\Server.exe" />
-    <Content Include="Server\obj\Debug\Server.pdb" />
+    <Content Include="images\back-arrow.png" />
+    <Content Include="images\camera.png" />
+    <Content Include="images\discount.png" />
+    <Content Include="images\icon.png" />
+    <Content Include="images\money.png" />
+    <Content Include="images\sale.png" />
+    <Content Include="images\ticket.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
