@@ -1539,9 +1539,9 @@
             this.label6.ForeColor = System.Drawing.Color.LightCoral;
             this.label6.Location = new System.Drawing.Point(55, 119);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(157, 30);
+            this.label6.Size = new System.Drawing.Size(146, 30);
             this.label6.TabIndex = 15;
-            this.label6.Text = "Silver Booking";
+            this.label6.Text = "TDA Threater";
             // 
             // pictureBox1
             // 

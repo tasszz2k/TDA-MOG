@@ -34,7 +34,25 @@ namespace DTA_Theater
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             WindowState = FormWindowState.Maximized;
-            //connect();
+            connect();
+        }
+
+        private void resetBookingInfo()
+        {
+            String selectedAuditorium = ((DataRowView)listAuditoriums.SelectedItem).Row[0].ToString();
+            String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
+            String movieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
+
+            txtAddress.Text = "";
+            txtCustomerName.Text = "";
+            txtTicketPrice.Text = "";
+            txtTotalAmount.Text = "";
+            txtDiscount.Text = "";
+            txtDOB.Text = "";
+            listDiscount.DataSource = null;
+            bookingSeats = new List<Seat>();
+
+            loadBookSeats(movieId, selectedSlot, selectedAuditorium);
         }
 
 
@@ -81,6 +99,7 @@ namespace DTA_Theater
         private void loadSeatByAuditorium(String auditorium)
         {
             seats.Clear();
+            bookingSeats.Clear();
 
             String sql = "SELECT Seat.Id, Row_name, Number, Row_classification.Type FROM Seat JOIN Row_classification ON Row_classification.Id = Seat.Type_id WHERE Auditorium_id = " + auditorium;
 
@@ -109,6 +128,12 @@ namespace DTA_Theater
 
         private void loadBookSeats(String movieId, String slot, String auditorium)
         {
+            foreach (Button btn in seatButtons)
+            {
+                btn.BackColor = Color.Gainsboro;
+                btn.Enabled = true;
+            }
+
             String sql = "SELECT Row_name, Number FROM Seat_reservation JOIN Screening ON Seat_reservation.Screening_id = Screening.Id JOIN Seat ON Seat.Id = Seat_reservation.Seat_id " +
                 "WHERE Screening.Start = " + slot + " AND Movie_id = " + movieId + " AND Screening.Auditorium_id = " + auditorium + " AND Screening.Screening_Date = CAST(GETDATE() AS DATE)";
 
@@ -129,6 +154,7 @@ namespace DTA_Theater
                 matches.BackColor = Color.IndianRed;
                 matches.Enabled = false;
             }
+
             dataReader.Close();
             command.Dispose();
         }
@@ -155,7 +181,7 @@ namespace DTA_Theater
                 txtDesc.Text = desc;
                 txtDuration.Text = duration + " minutes";
 
-                movieThumbnail.Load("./" + thumbnail);
+                movieThumbnail.Load("../../" + thumbnail);
             }
             dataReader.Close();
             command.Dispose();
@@ -221,13 +247,13 @@ namespace DTA_Theater
             {
                 bookedSeat.BackColor = Color.PeachPuff;
                 bookingSeats.Add(seats[indexSeat]);
-                //client.Send(serialize(bookedSeat.Text + ",Booked," + selectedMovie + "," + selectedSlot + "," + selectedAuditorium));
+                client.Send(serialize(bookedSeat.Text + ",Selected," + selectedMovie + "," + selectedSlot + "," + selectedAuditorium));
             }
             else
             {
                 bookedSeat.BackColor = Color.Gainsboro;
                 bookingSeats.Remove(seats[indexSeat]);
-                //client.Send(serialize(bookedSeat.Text + ",Cancelled," + selectedMovie + "," + selectedSlot + "," + selectedAuditorium));
+                client.Send(serialize(bookedSeat.Text + ",Cancelled," + selectedMovie + "," + selectedSlot + "," + selectedAuditorium));
             }
 
             if (bookingSeats.Count == 0)
@@ -298,7 +324,7 @@ namespace DTA_Theater
                         String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
                         String selectedMovie = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
 
-                        if (messageArr[1].Equals("Booked") && selectedMovie.Equals(messageArr[2]) && selectedSlot.Equals(messageArr[3]) && selectedAuditorium.Equals(messageArr[4]))
+                        if (messageArr[1].Equals("Selected") && selectedMovie.Equals(messageArr[2]) && selectedSlot.Equals(messageArr[3]) && selectedAuditorium.Equals(messageArr[4]))
                         {
                             pickedSeat.Enabled = false;
                             pickedSeat.BackColor = Color.PeachPuff;
@@ -307,7 +333,11 @@ namespace DTA_Theater
                         {
                             pickedSeat.Enabled = true;
                             pickedSeat.BackColor = Color.Gainsboro;
-                            pickedSeat.Text = messageArr[0];
+                        }
+                        else if (messageArr[1].Equals("Cancelled") && (!selectedMovie.Equals(messageArr[2]) || !selectedSlot.Equals(messageArr[3]) || !selectedAuditorium.Equals(messageArr[4])))
+                        {
+                            pickedSeat.Enabled = true;
+                            pickedSeat.BackColor = Color.Gainsboro;
                         }
 
                     }
@@ -411,8 +441,14 @@ namespace DTA_Theater
                 String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
                 String movieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
 
+                foreach (Seat seat in bookingSeats)
+                {
+                    client.Send(serialize(seat.Name + ",Cancelled," + movieId + "," + selectedSlot + "," + selectedAuditorium));
+                }
+
                 loadBookSeats(movieId, selectedSlot, selectedAuditorium);
                 loadSeatByAuditorium(selectedAuditorium);
+
             }
         }
 
@@ -436,43 +472,7 @@ namespace DTA_Theater
             note += "\n" + "Total Amount: " + txtTotalAmount.Text;
 
             if (MessageBox.Show("Do you want to print payment ?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[0].ToString();
-                String selectedMovieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
-                String movieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
-
-                SqlConnection conn = new SqlConnection(connString);
-
-                conn.Open();
-
-                SqlDataAdapter dataAdpater = new SqlDataAdapter();
-
-                foreach (Seat seat in bookingSeats)
-                {
-                    String sql = "INSERT INTO [dbo].[Seat_reservation]" +
-                        "([Seat_id]" +
-                        ",[Screening_id]" +
-                        ",[Employee_id]" +
-                        ",[Note])" +
-                  "VALUES" +
-                        "(@Seat_id" +
-                        ",@Screening_id" +
-                        ",@Employee_id" +
-                        ",@Note)";
-
-                    dataAdpater.InsertCommand = conn.CreateCommand();
-                    dataAdpater.InsertCommand.CommandText = sql;
-
-                    MessageBox.Show(seat.Id + "");
-
-                    dataAdpater.InsertCommand.Parameters.AddWithValue("Seat_id", seat.Id);
-                    dataAdpater.InsertCommand.Parameters.AddWithValue("Screening_id", selectedSlot);
-                    dataAdpater.InsertCommand.Parameters.AddWithValue("Employee_id", "1");
-                    dataAdpater.InsertCommand.Parameters.AddWithValue("Note", note);
-
-                    dataAdpater.InsertCommand.ExecuteNonQuery();
-                }
-
+            {           
                 using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "PDF file|*.pdf", ValidateNames = true })
                 {
                     if (sfd.ShowDialog() == DialogResult.OK)
@@ -506,8 +506,44 @@ namespace DTA_Theater
                     }
                 }
 
-                MessageBox.Show("Booking successful !!");
             }
+
+            String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[0].ToString();
+            String selectedMovieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
+            String movieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
+
+            SqlConnection conn = new SqlConnection(connString);
+
+            conn.Open();
+
+            SqlDataAdapter dataAdpater = new SqlDataAdapter();
+
+            foreach (Seat seat in bookingSeats)
+            {
+                String sql = "INSERT INTO [dbo].[Seat_reservation]" +
+               "([Seat_id]" +
+               ",[Screening_id]" +
+               ",[Employee_id]" +
+               ",[Note])" +
+         "VALUES" +
+               "(@Seat_id" +
+               ",@Screening_id" +
+               ",@Employee_id" +
+               ",@Note)";
+
+                dataAdpater.InsertCommand = conn.CreateCommand();
+                dataAdpater.InsertCommand.CommandText = sql;
+
+                dataAdpater.InsertCommand.Parameters.AddWithValue("Seat_id", seat.Id);
+                dataAdpater.InsertCommand.Parameters.AddWithValue("Screening_id", selectedSlot);
+                dataAdpater.InsertCommand.Parameters.AddWithValue("Employee_id", "1");
+                dataAdpater.InsertCommand.Parameters.AddWithValue("Note", note);
+
+                dataAdpater.InsertCommand.ExecuteNonQuery();
+            }
+
+            MessageBox.Show("Booking successful !!");
+            resetBookingInfo();
 
         }
 
