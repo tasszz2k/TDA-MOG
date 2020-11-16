@@ -1,4 +1,4 @@
-﻿namespace Realtime_Chat
+﻿namespace DTA_Theater
 {
     partial class Client
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Realtime_Chat
+namespace DTA_Theater
 {
     class Seat
     {

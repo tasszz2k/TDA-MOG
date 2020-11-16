@@ -91,6 +91,9 @@ namespace DTA_Theater.view
                 this.Hide();
 
                 //Replace this to perform task
+                Client cl = new Client();
+
+                cl.ShowDialog();
 
                 this.Close();
             }

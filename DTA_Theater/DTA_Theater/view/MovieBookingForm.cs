@@ -17,11 +17,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Realtime_Chat
+namespace DTA_Theater
 {
     public partial class Client : Form
     {
-        private String connString = ConfigurationManager.ConnectionStrings["connString"].ToString();
+        private String connString = ConfigurationManager.ConnectionStrings["cnnString"].ToString();
 
         Socket client;
         IPEndPoint IP;
