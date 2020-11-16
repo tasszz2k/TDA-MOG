@@ -1,0 +1,44 @@
+1. Đặt vé
+
+1. Employee side
+Chức năng chính
+
+- Truong's jobs
+Chọn phim (Choose Film) -> Chọn suất chiếu (Choose screening) -> Chọn chỗ(Choose seat) -> Đặt vé
+
+- Trình chiếu các film đang được chiếu (Select các film đang có screening)
+- Chọn suất chiếu (Select các screening có film_id = customer select film id) 
+- Chọn chỗ (Select các chỗ có auditorium_id = auditorium_id của screening)
+- Tạo 1 form để film các thông tin của khách hàng bao gồm
++ Thôn tin liên lạc
++ Tên
++ Etc
+=> Lưu dưới dạng text vào Note column trong bảng seat_reservation
+
+Additional:
+- Hiển thị những chỗ đã chọn
+- Xem thông tin seat-reservation thông qua những chỗ được chọn
+- Real-time checking - Cập nhật những chỗ đã được chọn real-time
+- Làm giao diện
+
+2. Admin Side
+Tuan Anh's jobs
+- Xem danh sách nhân viên
+- Quản lý nhân viên (Approve, Edit, De-activate)
+- Xem danh sách phim (Film List -> Screening list)
+- Thêm Phim (Add Film)
+- Sửa Phim (Edit Film)
+
+- Xóa Screening (Delete Screening) - Auto delete (Delete những screening đã được chiếu)
+- Chia screening cho film (Screening rearrange) - Chia khoảng thời gian chiếu và rạp chiếu
+3. Database - fake data, create tables and diagram
+
+Schoole: git config --global http.proxy http://proxy:8080
+Home: git config --global --unset http.proxy
+
+
+
+
+
+
+
