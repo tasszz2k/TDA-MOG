@@ -1,4 +1,5 @@
 ﻿    using DTA_Theater.dal;
+using DTA_Theater.view;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace DTA_Theater
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ScreeningForm());            
+            Application.Run(new LoginForm());            
         }
     }
 }

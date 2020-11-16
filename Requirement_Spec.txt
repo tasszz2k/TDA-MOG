@@ -24,7 +24,7 @@ Additional:
 2. Admin Side
 Tuan Anh's jobs
 - Xem danh sách nhân viên
-- Quản lý nhân viên (Approve, Edit, De-activate)
+- Quản lý nhân viên (Create, Edit, De-activate)
 - Xem danh sách phim (Film List -> Screening list)
 - Thêm Phim (Add Film)
 - Sửa Phim (Edit Film)

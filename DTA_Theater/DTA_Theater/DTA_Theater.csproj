@@ -53,6 +53,24 @@
     <Compile Include="dal\ScreeningDAO.cs" />
     <Compile Include="dal\SeatDAO.cs" />
     <Compile Include="entity\Row_classification.cs" />
+    <Compile Include="view\DemoAdminFormDTA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DemoAdminFormDTA.Designer.cs">
+      <DependentUpon>DemoAdminFormDTA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DemoPickMovieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DemoPickMovieForm.Designer.cs">
+      <DependentUpon>DemoPickMovieForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\ScreeningControlForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +80,15 @@
     <Compile Include="entity\Auditorium.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="view\DemoAdminFormDTA.resx">
+      <DependentUpon>DemoAdminFormDTA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DemoPickMovieForm.resx">
+      <DependentUpon>DemoPickMovieForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\ScreeningControlForm.resx">
       <DependentUpon>ScreeningControlForm.cs</DependentUpon>
     </EmbeddedResource>
