@@ -74,6 +74,7 @@ namespace DTA_Theater.view
                 {
                     role_id = reader.GetInt32(0);
                 }
+                Session.EmployeeId = role_id;
 
             }
             catch (Exception Ex)
@@ -148,6 +149,11 @@ namespace DTA_Theater.view
 
                 Login(username, pass);
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
