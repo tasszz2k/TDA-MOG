@@ -91,8 +91,6 @@ namespace DTA_Theater.view
                 this.Hide();
 
                 //Replace this to perform task
-                DemoPickMovieForm form = new DemoPickMovieForm();
-                form.ShowDialog();
 
                 this.Close();
             }
