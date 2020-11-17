@@ -22,8 +22,8 @@ namespace DTA_Theater.dal
 
             String[] normals = { "A", "B", "C" };
             String[] vips = { "D", "E", "F" };
-            String[] deluxes = { "H", "J" };
-            String[] sweets = { "K" };
+            String[] deluxes = { "G", "H" };
+            String[] sweets = { "J" };
 
             List<String[]> types = new List<string[]>();
             types.Add(normals);

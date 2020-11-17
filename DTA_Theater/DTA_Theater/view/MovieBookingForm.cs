@@ -520,26 +520,32 @@ namespace DTA_Theater
 
             foreach (Seat seat in bookingSeats)
             {
-                String sql = "INSERT INTO [dbo].[Seat_reservation]" +
-               "([Seat_id]" +
-               ",[Screening_id]" +
-               ",[Employee_id]" +
-               ",[Note])" +
-         "VALUES" +
-               "(@Seat_id" +
-               ",@Screening_id" +
-               ",@Employee_id" +
-               ",@Note)";
+                try
+                {
+                    String sql = "INSERT INTO [dbo].[Seat_reservation]" +
+                       "([Seat_id]" +
+                       ",[Screening_id]" +
+                       ",[Employee_id]" +
+                       ",[Note])" +
+                 "VALUES" +
+                       "(@Seat_id" +
+                       ",@Screening_id" +
+                       ",@Employee_id" +
+                       ",@Note)";
 
-                dataAdpater.InsertCommand = conn.CreateCommand();
-                dataAdpater.InsertCommand.CommandText = sql;
+                    dataAdpater.InsertCommand = conn.CreateCommand();
+                    dataAdpater.InsertCommand.CommandText = sql;
 
-                dataAdpater.InsertCommand.Parameters.AddWithValue("Seat_id", seat.Id);
-                dataAdpater.InsertCommand.Parameters.AddWithValue("Screening_id", selectedSlot);
-                dataAdpater.InsertCommand.Parameters.AddWithValue("Employee_id", "1");
-                dataAdpater.InsertCommand.Parameters.AddWithValue("Note", note);
+                    dataAdpater.InsertCommand.Parameters.AddWithValue("Seat_id", seat.Id);
+                    dataAdpater.InsertCommand.Parameters.AddWithValue("Screening_id", selectedSlot);
+                    dataAdpater.InsertCommand.Parameters.AddWithValue("Employee_id", "1");
+                    dataAdpater.InsertCommand.Parameters.AddWithValue("Note", note);
 
-                dataAdpater.InsertCommand.ExecuteNonQuery();
+                    dataAdpater.InsertCommand.ExecuteNonQuery();
+                } catch (Exception ex)
+                {
+
+                }
             }
 
             MessageBox.Show("Booking successful !!");

@@ -45,6 +45,7 @@
             this.label1.Size = new System.Drawing.Size(305, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Log into TDA Theater";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
