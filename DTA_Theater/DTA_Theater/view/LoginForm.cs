@@ -103,7 +103,7 @@ namespace DTA_Theater.view
                 this.Hide();
 
                 //Replace this to perform task
-                DemoAdminFormDTA form = new DemoAdminFormDTA();
+                AdminForm form = new AdminForm();
                 form.ShowDialog();
 
                 this.Close();
