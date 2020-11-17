@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTA_Theater.entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

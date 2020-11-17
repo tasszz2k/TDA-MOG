@@ -59,6 +59,7 @@
     <Compile Include="dal\MovieDAO.cs" />
     <Compile Include="dal\ScreeningDAO.cs" />
     <Compile Include="dal\SeatDAO.cs" />
+    <Compile Include="entity\OrderedFood.cs" />
     <Compile Include="entity\Row_classification.cs" />
     <Compile Include="entity\Seat.cs" />
     <Compile Include="view\AdminForm.cs">
@@ -66,6 +67,18 @@
     </Compile>
     <Compile Include="view\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\EmployeeFunctionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\EmployeeFunctionForm.Designer.cs">
+      <DependentUpon>EmployeeFunctionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\FoodOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FoodOrderForm.Designer.cs">
+      <DependentUpon>FoodOrderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\LoginForm.cs">
       <SubType>Form</SubType>
@@ -90,6 +103,12 @@
     <Compile Include="view\Session.cs" />
     <EmbeddedResource Include="view\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\EmployeeFunctionForm.resx">
+      <DependentUpon>EmployeeFunctionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\FoodOrderForm.resx">
+      <DependentUpon>FoodOrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -128,7 +147,9 @@
   <ItemGroup>
     <Content Include="images\back-arrow.png" />
     <Content Include="images\camera.png" />
+    <None Include="images\coming-of-age-film.jpg" />
     <Content Include="images\discount.png" />
+    <None Include="images\food.jpg" />
     <Content Include="images\icon.png" />
     <Content Include="images\money.png" />
     <Content Include="images\sale.png" />
