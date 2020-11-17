@@ -88,6 +88,9 @@
     <Compile Include="entity\Auditorium.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="view\Session.cs" />
+    <EmbeddedResource Include="view\AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
