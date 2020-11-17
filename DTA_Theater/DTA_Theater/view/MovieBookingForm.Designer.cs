@@ -1815,10 +1815,10 @@
             this.panel7.Controls.Add(this.label16);
             this.panel7.Controls.Add(this.label15);
             this.panel7.Controls.Add(this.label14);
-            this.panel7.Location = new System.Drawing.Point(944, 332);
+            this.panel7.Location = new System.Drawing.Point(989, 332);
             this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(365, 384);
+            this.panel7.Size = new System.Drawing.Size(446, 384);
             this.panel7.TabIndex = 27;
             this.panel7.Paint += new System.Windows.Forms.PaintEventHandler(this.panel7_Paint);
             // 
@@ -2068,7 +2068,7 @@
             this.label22.BackColor = System.Drawing.Color.LightCoral;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label22.Location = new System.Drawing.Point(1179, 22);
+            this.label22.Location = new System.Drawing.Point(1156, 22);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(110, 15);
@@ -2081,7 +2081,7 @@
             this.label23.BackColor = System.Drawing.Color.Salmon;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label23.Location = new System.Drawing.Point(1095, 301);
+            this.label23.Location = new System.Drawing.Point(1156, 297);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(117, 17);

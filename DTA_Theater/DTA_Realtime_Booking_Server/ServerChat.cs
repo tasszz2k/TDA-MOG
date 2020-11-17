@@ -21,6 +21,8 @@ namespace Server
         IPEndPoint IP;
         Socket server;
 
+        List<String> bookings;
+
         public ServerChat()
         {
             InitializeComponent();
@@ -33,12 +35,13 @@ namespace Server
 
         private void ServerChat_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void connect()
         {
             clients = new List<Socket>();
+            bookings = new List<String>();
 
             IP = new IPEndPoint(IPAddress.Loopback, 9999);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
@@ -84,11 +87,66 @@ namespace Server
 
                     string message = (String)deSerialize(data);
 
-                    foreach (Socket s in clients)
+                    String[] messageArr = message.Split(',');
+
+                    Boolean fetchMessage = true;
+
+                    if (messageArr[0].Equals("Fetch") && bookings.Count != 0)
                     {
-                        if (s != null && s != client)
+                        List<String> bookedSeats = new List<string>();
+
+                        String selectedAuditorium = messageArr[3];
+                        String selectedSlot = messageArr[2];
+                        String movieId = messageArr[1];
+
+                        for (int i = 0; i < bookings.Count; i++)
                         {
-                            s.Send(serialize(message));
+                            String[] bookingMessageArr = bookings[i].Split(',');
+
+                            if (movieId.Equals(bookingMessageArr[2]) && selectedSlot.Equals(bookingMessageArr[3]) && selectedAuditorium.Equals(bookingMessageArr[4]))
+                            {
+                                bookedSeats.Add(bookingMessageArr[0]);
+                            }
+                        }
+
+                        if (bookedSeats.Count > 0)
+                        {
+                            String bookedMessage = "Fetch,";
+
+                            for (int i = 0; i < bookedSeats.Count; i++)
+                            {
+                                if (i == bookedSeats.Count - 1)
+                                {
+                                    bookedMessage += bookedSeats[i];
+                                    break;
+                                }
+
+                                bookedMessage += bookedSeats[i] + ",";
+                            }
+
+                            client.Send(serialize(bookedMessage));
+                        }
+                    }
+
+                    if (messageArr[1].Equals("Selected") && bookings.IndexOf(message) < 0)
+                    {
+                        bookings.Add(message);
+                        fetchMessage = false;
+                    }
+                    else if (messageArr[1].Equals("Cancelled") && bookings.IndexOf(message.Replace("Cancelled", "Selected")) >= 0)
+                    {
+                        bookings.Remove(message.Replace("Cancelled", "Selected"));
+                        fetchMessage  = false;
+                    }
+
+                    if (!fetchMessage)
+                    {
+                        foreach (Socket s in clients)
+                        {
+                            if (s != null && s != client)
+                            {
+                                s.Send(serialize(message));
+                            }
                         }
                     }
 
@@ -121,7 +179,7 @@ namespace Server
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
