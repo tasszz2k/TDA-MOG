@@ -1,4 +1,5 @@
-﻿using iTextSharp.text;
+﻿using DTA_Theater.view;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,11 @@ namespace DTA_Theater
         List<Button> seatButtons;
         List<Seat> bookingSeats;
         List<Seat> seats;
+
+        String selectedMovie = "";
+        String selectedSlot = "";
+        String selectedAuditorium = "";
+
         public Client()
         {
             InitializeComponent();
@@ -39,10 +45,6 @@ namespace DTA_Theater
 
         private void resetBookingInfo()
         {
-            String selectedAuditorium = ((DataRowView)listAuditoriums.SelectedItem).Row[0].ToString();
-            String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
-            String movieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
-
             txtAddress.Text = "";
             txtCustomerName.Text = "";
             txtTicketPrice.Text = "";
@@ -52,7 +54,7 @@ namespace DTA_Theater
             listDiscount.DataSource = null;
             bookingSeats = new List<Seat>();
 
-            loadBookSeats(movieId, selectedSlot, selectedAuditorium);
+            loadBookSeats(selectedMovie, selectedSlot, selectedAuditorium);
         }
 
 
@@ -183,6 +185,7 @@ namespace DTA_Theater
 
                 movieThumbnail.Load("../../" + thumbnail);
             }
+
             dataReader.Close();
             command.Dispose();
         }
@@ -238,10 +241,6 @@ namespace DTA_Theater
         {
             Button bookedSeat = (Button)sender;
             int indexSeat = seatButtons.IndexOf(bookedSeat);
-
-            String selectedAuditorium = ((DataRowView)listAuditoriums.SelectedItem).Row[0].ToString();
-            String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
-            String selectedMovie = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
 
             if (bookedSeat.BackColor == Color.Gainsboro)
             {
@@ -320,10 +319,6 @@ namespace DTA_Theater
                         String[] messageArr = message.Split(',');
                         Button pickedSeat = this.Controls.Find(messageArr[0], true).FirstOrDefault() as Button;
 
-                        String selectedAuditorium = ((DataRowView)listAuditoriums.SelectedItem).Row[0].ToString();
-                        String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
-                        String selectedMovie = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
-
                         if (messageArr[1].Equals("Selected") && selectedMovie.Equals(messageArr[2]) && selectedSlot.Equals(messageArr[3]) && selectedAuditorium.Equals(messageArr[4]))
                         {
                             pickedSeat.Enabled = false;
@@ -338,6 +333,16 @@ namespace DTA_Theater
                         {
                             pickedSeat.Enabled = true;
                             pickedSeat.BackColor = Color.Gainsboro;
+                        }
+
+                        if (messageArr[0].Equals("Fetch"))
+                        {
+                            for (int i = 1; i < messageArr.Length; i++)
+                            {
+                                Button temp = this.Controls.Find(messageArr[i], true).FirstOrDefault() as Button;
+                                temp.Enabled = false;
+                                temp.BackColor = Color.PeachPuff;
+                            }
                         }
 
                     }
@@ -378,12 +383,12 @@ namespace DTA_Theater
         {
             if (listAvailableMovies.SelectedIndex > -1)
             {
-                String selectedMovieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
+                String selectedMovieID = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
 
                 DataSet ds = new DataSet();
 
                 String sql = "SELECT Screening.Id, Movie.Duration_min, Start, Title FROM Screening RIGHT JOIN Movie ON Movie.Id = Screening.Movie_id" +
-                    " WHERE Screening.Screening_Date = CAST(GETDATE() AS DATE) And Movie.Id = " + selectedMovieId;
+                    " WHERE Screening.Screening_Date = CAST(GETDATE() AS DATE) And Movie.Id = " + selectedMovieID;
 
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connString);
 
@@ -400,12 +405,11 @@ namespace DTA_Theater
                     dr[3] = start + ": 00 - " + (start + hour) + ": " + surplus;
                 }
 
-
                 listMovieSlots.DataSource = ds.Tables["Slot"];
                 listMovieSlots.DisplayMember = "Title";
                 listMovieSlots.ValueMember = "Start";
 
-                loadMovieDetails(selectedMovieId);
+                loadMovieDetails(selectedMovieID);
             }
 
         }
@@ -414,14 +418,13 @@ namespace DTA_Theater
         {
             if (listMovieSlots.SelectedIndex > -1)
             {
-                String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
-                String selectedMovieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
-                String movieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
+                String selectedSlotStart = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
+                String selectedMovieID = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
 
                 DataSet ds = new DataSet();
 
                 String sql = "SELECT DISTINCT Auditorium.Id, Auditorium.Name FROM Screening JOIN Auditorium " +
-                    "ON Auditorium.Id = Screening.Auditorium_id  WHERE Screening.Screening_Date = CAST(GETDATE() AS DATE) And Movie_id = " + selectedMovieId + " AND Start = " + selectedSlot;
+                    "ON Auditorium.Id = Screening.Auditorium_id  WHERE Screening.Screening_Date = CAST(GETDATE() AS DATE) And Movie_id = " + selectedMovieID + " AND Start = " + selectedSlotStart;
 
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, connString);
 
@@ -437,18 +440,26 @@ namespace DTA_Theater
         {
             if (listAuditoriums.SelectedIndex > -1)
             {
-                String selectedAuditorium = ((DataRowView)listAuditoriums.SelectedItem).Row[0].ToString();
-                String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
-                String movieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
+                String newAuditorium = ((DataRowView)listAuditoriums.SelectedItem).Row[0].ToString();
+                String selectedSlotStart = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
+                String selectedMovieID = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
 
-                foreach (Seat seat in bookingSeats)
+                if (bookingSeats.Count != 0)
                 {
-                    client.Send(serialize(seat.Name + ",Cancelled," + movieId + "," + selectedSlot + "," + selectedAuditorium));
+                    foreach (Seat seat in bookingSeats)
+                    {
+                        client.Send(serialize(seat.Name + ",Cancelled," + selectedMovie + "," + selectedSlot + "," + selectedAuditorium));
+                    }
                 }
 
-                loadBookSeats(movieId, selectedSlot, selectedAuditorium);
-                loadSeatByAuditorium(selectedAuditorium);
+                loadBookSeats(selectedMovieID, selectedSlotStart, newAuditorium);
+                loadSeatByAuditorium(newAuditorium);
 
+                client.Send(serialize("Fetch," + selectedMovieID + "," + selectedSlotStart + "," + newAuditorium));
+
+                selectedAuditorium = newAuditorium;
+                selectedMovie = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
+                selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[2].ToString();
             }
         }
 
@@ -472,7 +483,7 @@ namespace DTA_Theater
             note += "\n" + "Total Amount: " + txtTotalAmount.Text;
 
             if (MessageBox.Show("Do you want to print payment ?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {           
+            {
                 using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "PDF file|*.pdf", ValidateNames = true })
                 {
                     if (sfd.ShowDialog() == DialogResult.OK)
@@ -508,9 +519,7 @@ namespace DTA_Theater
 
             }
 
-            String selectedSlot = ((DataRowView)listMovieSlots.SelectedItem).Row[0].ToString();
-            String selectedMovieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
-            String movieId = ((DataRowView)listAvailableMovies.SelectedItem).Row[0].ToString();
+            String selectedSlotID = ((DataRowView)listMovieSlots.SelectedItem).Row[0].ToString();
 
             SqlConnection conn = new SqlConnection(connString);
 
@@ -537,14 +546,17 @@ namespace DTA_Theater
                     dataAdpater.InsertCommand.CommandText = sql;
 
                     dataAdpater.InsertCommand.Parameters.AddWithValue("Seat_id", seat.Id);
-                    dataAdpater.InsertCommand.Parameters.AddWithValue("Screening_id", selectedSlot);
-                    dataAdpater.InsertCommand.Parameters.AddWithValue("Employee_id", "1");
+                    dataAdpater.InsertCommand.Parameters.AddWithValue("Screening_id", selectedSlotID);
+                    dataAdpater.InsertCommand.Parameters.AddWithValue("Employee_id", Session.EmployeeId);
                     dataAdpater.InsertCommand.Parameters.AddWithValue("Note", note);
 
                     dataAdpater.InsertCommand.ExecuteNonQuery();
-                } catch (Exception ex)
+                }
+                catch
                 {
-
+                    MessageBox.Show("This seats are already booked !!");
+                    loadBookSeats(selectedMovie, selectedSlot, selectedAuditorium);
+                    return;
                 }
             }
 
