@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblPath = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnChoosePictue = new System.Windows.Forms.Button();
             this.pictureBoxThumbnail = new System.Windows.Forms.PictureBox();
             this.nudDuration = new System.Windows.Forms.NumericUpDown();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -47,9 +50,6 @@
             this.tbxId = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnChoosePictue = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblPath = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxThumbnail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).BeginInit();
@@ -57,6 +57,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Beige;
             this.panel1.Controls.Add(this.lblPath);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.btnChoosePictue);
@@ -83,6 +84,38 @@
             this.panel1.Size = new System.Drawing.Size(573, 633);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // lblPath
+            // 
+            this.lblPath.AutoSize = true;
+            this.lblPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            this.lblPath.Location = new System.Drawing.Point(350, 454);
+            this.lblPath.Name = "lblPath";
+            this.lblPath.Size = new System.Drawing.Size(40, 17);
+            this.lblPath.TabIndex = 24;
+            this.lblPath.Text = "none";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            this.label7.Location = new System.Drawing.Point(303, 454);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 17);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Path:";
+            // 
+            // btnChoosePictue
+            // 
+            this.btnChoosePictue.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnChoosePictue.ForeColor = System.Drawing.Color.White;
+            this.btnChoosePictue.Location = new System.Drawing.Point(301, 490);
+            this.btnChoosePictue.Name = "btnChoosePictue";
+            this.btnChoosePictue.Size = new System.Drawing.Size(128, 36);
+            this.btnChoosePictue.TabIndex = 22;
+            this.btnChoosePictue.Text = "Choose Picture";
+            this.btnChoosePictue.UseVisualStyleBackColor = false;
+            this.btnChoosePictue.Click += new System.EventHandler(this.btnChoosePictue_Click);
             // 
             // pictureBoxThumbnail
             // 
@@ -118,37 +151,44 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
             this.btnCancel.Location = new System.Drawing.Point(416, 568);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(116, 49);
             this.btnCancel.TabIndex = 19;
             this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnClear
             // 
+            this.btnClear.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnClear.ForeColor = System.Drawing.Color.White;
             this.btnClear.Location = new System.Drawing.Point(233, 568);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(116, 49);
             this.btnClear.TabIndex = 18;
             this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Location = new System.Drawing.Point(60, 568);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(116, 49);
             this.btnSave.TabIndex = 17;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
             this.label9.Location = new System.Drawing.Point(24, 426);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(78, 17);
@@ -158,6 +198,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
             this.label10.Location = new System.Drawing.Point(24, 376);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 17);
@@ -176,6 +217,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
             this.label6.Location = new System.Drawing.Point(24, 277);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(83, 17);
@@ -193,6 +235,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
             this.label5.Location = new System.Drawing.Point(24, 229);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 17);
@@ -209,6 +252,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
             this.label4.Location = new System.Drawing.Point(24, 174);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 17);
@@ -225,6 +269,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
             this.label3.Location = new System.Drawing.Point(24, 121);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 17);
@@ -242,6 +287,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
             this.label2.Location = new System.Drawing.Point(24, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(25, 17);
@@ -252,40 +298,13 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(147, 10);
+            this.label1.ForeColor = System.Drawing.Color.LightCoral;
+            this.label1.Location = new System.Drawing.Point(165, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(264, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Movie Management";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnChoosePictue
-            // 
-            this.btnChoosePictue.Location = new System.Drawing.Point(301, 490);
-            this.btnChoosePictue.Name = "btnChoosePictue";
-            this.btnChoosePictue.Size = new System.Drawing.Size(128, 36);
-            this.btnChoosePictue.TabIndex = 22;
-            this.btnChoosePictue.Text = "Choose Picture";
-            this.btnChoosePictue.UseVisualStyleBackColor = true;
-            this.btnChoosePictue.Click += new System.EventHandler(this.btnChoosePictue_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(303, 454);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 17);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "Path:";
-            // 
-            // lblPath
-            // 
-            this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(350, 454);
-            this.lblPath.Name = "lblPath";
-            this.lblPath.Size = new System.Drawing.Size(40, 17);
-            this.lblPath.TabIndex = 24;
-            this.lblPath.Text = "none";
             // 
             // InsertUpdateMovieForm
             // 
