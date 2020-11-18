@@ -40,9 +40,10 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(457, 340);
+            this.label1.Location = new System.Drawing.Point(343, 276);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(331, 17);
+            this.label1.Size = new System.Drawing.Size(260, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "A product with cooperation of Alter Company";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -55,12 +56,14 @@
             // 
             // btnFood
             // 
-            this.btnFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFood.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnFood.Image = global::DTA_Theater.Properties.Resources.food;
             this.btnFood.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFood.Location = new System.Drawing.Point(234, 188);
+            this.btnFood.Location = new System.Drawing.Point(176, 153);
+            this.btnFood.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFood.Name = "btnFood";
-            this.btnFood.Size = new System.Drawing.Size(321, 123);
+            this.btnFood.Size = new System.Drawing.Size(241, 100);
             this.btnFood.TabIndex = 0;
             this.btnFood.Text = "Food Order";
             this.btnFood.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -69,12 +72,14 @@
             // 
             // btnMovie
             // 
-            this.btnMovie.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMovie.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMovie.ForeColor = System.Drawing.Color.White;
             this.btnMovie.Image = global::DTA_Theater.Properties.Resources.coming_of_age_film;
             this.btnMovie.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMovie.Location = new System.Drawing.Point(234, 28);
+            this.btnMovie.Location = new System.Drawing.Point(176, 23);
+            this.btnMovie.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMovie.Name = "btnMovie";
-            this.btnMovie.Size = new System.Drawing.Size(321, 124);
+            this.btnMovie.Size = new System.Drawing.Size(241, 101);
             this.btnMovie.TabIndex = 0;
             this.btnMovie.Text = "Movie Booking";
             this.btnMovie.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -83,12 +88,13 @@
             // 
             // EmployeeFunctionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 366);
+            this.ClientSize = new System.Drawing.Size(600, 297);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnFood);
             this.Controls.Add(this.btnMovie);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "EmployeeFunctionForm";
             this.Text = "EmployeeFunctionForm";
             this.ResumeLayout(false);

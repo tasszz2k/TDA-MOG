@@ -1,11 +1,14 @@
 ﻿using DTA_Theater.dal;
 using DTA_Theater.entity;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +34,7 @@ namespace DTA_Theater.view
         }
 
         private void RefreshOrderList()
-        {           
+        {
 
             DataTable foods = new DataTable();
             foods.Columns.Add(new DataColumn("ID"));
@@ -56,11 +59,11 @@ namespace DTA_Theater.view
                     total += food.Quantity * food.Price;
 
                     foods.Rows.Add(dr);
-                }                
+                }
             }
 
             gvPickeds.DataSource = foods;
-            lbTotal.Text = total.ToString();
+            lbTotal.Text = "$" + total.ToString();
         }
 
         //private void RefreshDataAfterDelete()
@@ -146,7 +149,7 @@ namespace DTA_Theater.view
 
         private void gvFoods_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void gvFoods_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -164,7 +167,7 @@ namespace DTA_Theater.view
             {
                 DataGridViewRow pickedRow = (DataGridViewRow)row;
 
-                foreach(OrderedFood food in orderList)
+                foreach (OrderedFood food in orderList)
                 {
                     if (food.Name.Equals(pickedRow.Cells[1].Value.ToString()))
                     {
@@ -184,8 +187,57 @@ namespace DTA_Theater.view
             String bill = "";
             foreach (OrderedFood food in orderList)
             {
-                bill += food.ToString() + "\n";
+                if (food.Quantity > 0)
+                {
+                    bill += food.ToString() + "\n";
+                }
             }
+
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "PDF file|*.pdf", ValidateNames = true })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    iTextSharp.text.Document doc = new iTextSharp.text.Document(PageSize.A4.Rotate());
+
+                    try
+                    {
+                        PdfWriter.GetInstance(doc, new FileStream(sfd.FileName, FileMode.Create));
+
+                        doc.Open();
+                        Boolean succeed = doc.Add(new iTextSharp.text.Paragraph(bill));
+
+                        if (succeed)
+                        {
+                            MessageBox.Show("Export Bill successful !!");                          
+                        }
+                        else
+                        {
+                            MessageBox.Show("Export Bill Error !!");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        gvPickeds.DataSource = null;
+                        lbTotal.Text = "0$";
+                        orderList = new List<OrderedFood>();
+
+                        doc.Close();
+                    }
+                }
+            }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            EmployeeFunctionForm form = new EmployeeFunctionForm();
+
+            form.ShowDialog();
         }
     }
 }

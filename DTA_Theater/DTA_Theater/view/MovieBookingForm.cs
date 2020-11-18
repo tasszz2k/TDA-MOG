@@ -333,6 +333,10 @@ namespace DTA_Theater
                         {
                             pickedSeat.Enabled = true;
                             pickedSeat.BackColor = Color.Gainsboro;
+                        } else if (messageArr[1].Equals("Booked") && selectedMovie.Equals(messageArr[2]) && selectedSlot.Equals(messageArr[3]) && selectedAuditorium.Equals(messageArr[4]))
+                        {
+                            pickedSeat.BackColor = Color.IndianRed;
+                            pickedSeat.Enabled = false;
                         }
 
                         if (messageArr[0].Equals("Fetch"))
@@ -511,7 +515,7 @@ namespace DTA_Theater
                             MessageBox.Show(ex.Message);
                         }
                         finally
-                        {
+                        {                      
                             doc.Close();
                         }
                     }
@@ -529,6 +533,8 @@ namespace DTA_Theater
 
             foreach (Seat seat in bookingSeats)
             {
+                client.Send(serialize(seat.Name + ",Booked," + selectedMovie + "," + selectedSlot + "," + selectedAuditorium));
+
                 try
                 {
                     String sql = "INSERT INTO [dbo].[Seat_reservation]" +
@@ -563,6 +569,7 @@ namespace DTA_Theater
             MessageBox.Show("Booking successful !!");
             resetBookingInfo();
 
+            client.Send(serialize("Fetch," + selectedMovie + "," + selectedSlot + "," + selectedAuditorium));
         }
 
         private void panelDiscount_MouseClick(object sender, MouseEventArgs e)
@@ -604,6 +611,15 @@ namespace DTA_Theater
                 txtDiscount.Text = "$" + moneyAfterDiscount.ToString("0.##") + "";
                 txtTotalAmount.Text = "$" + (totalAmount - moneyAfterDiscount).ToString("0.##") + "";
             }
+        }
+
+        private void pnBack_MouseClick(object sender, MouseEventArgs e)
+        {       
+            this.Hide();
+
+            EmployeeFunctionForm form = new EmployeeFunctionForm();
+
+            form.ShowDialog();
         }
     }
 }

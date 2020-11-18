@@ -150,7 +150,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnMenu = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnBack = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -209,7 +209,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnMenu.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.pnBack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -1558,7 +1558,7 @@
             // 
             this.pnMenu.BackColor = System.Drawing.Color.Bisque;
             this.pnMenu.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnMenu.Controls.Add(this.panel4);
+            this.pnMenu.Controls.Add(this.pnBack);
             this.pnMenu.Controls.Add(this.panel3);
             this.pnMenu.Controls.Add(this.pictureBox1);
             this.pnMenu.Controls.Add(this.label6);
@@ -1567,16 +1567,17 @@
             this.pnMenu.Size = new System.Drawing.Size(259, 763);
             this.pnMenu.TabIndex = 17;
             // 
-            // panel4
+            // pnBack
             // 
-            this.panel4.BackColor = System.Drawing.Color.DarkSalmon;
-            this.panel4.Controls.Add(this.pictureBox3);
-            this.panel4.Controls.Add(this.label8);
-            this.panel4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel4.Location = new System.Drawing.Point(0, 247);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(256, 64);
-            this.panel4.TabIndex = 18;
+            this.pnBack.BackColor = System.Drawing.Color.DarkSalmon;
+            this.pnBack.Controls.Add(this.pictureBox3);
+            this.pnBack.Controls.Add(this.label8);
+            this.pnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnBack.Location = new System.Drawing.Point(0, 247);
+            this.pnBack.Name = "pnBack";
+            this.pnBack.Size = new System.Drawing.Size(256, 64);
+            this.pnBack.TabIndex = 18;
+            this.pnBack.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnBack_MouseClick);
             // 
             // pictureBox3
             // 
@@ -1588,6 +1589,7 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 1;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnBack_MouseClick);
             // 
             // label8
             // 
@@ -1600,6 +1602,7 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Back";
             this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnBack_MouseClick);
             // 
             // panel3
             // 
@@ -1734,7 +1737,7 @@
             this.label11.BackColor = System.Drawing.Color.LightCoral;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label11.Location = new System.Drawing.Point(427, 22);
+            this.label11.Location = new System.Drawing.Point(425, 22);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(50, 15);
@@ -1744,7 +1747,7 @@
             // listMovieSlots
             // 
             this.listMovieSlots.FormattingEnabled = true;
-            this.listMovieSlots.Location = new System.Drawing.Point(571, 58);
+            this.listMovieSlots.Location = new System.Drawing.Point(582, 58);
             this.listMovieSlots.Margin = new System.Windows.Forms.Padding(2);
             this.listMovieSlots.Name = "listMovieSlots";
             this.listMovieSlots.Size = new System.Drawing.Size(138, 82);
@@ -1757,7 +1760,7 @@
             this.label12.BackColor = System.Drawing.Color.LightCoral;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label12.Location = new System.Drawing.Point(586, 22);
+            this.label12.Location = new System.Drawing.Point(608, 22);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(89, 15);
@@ -1767,10 +1770,10 @@
             // listAuditoriums
             // 
             this.listAuditoriums.FormattingEnabled = true;
-            this.listAuditoriums.Location = new System.Drawing.Point(747, 58);
+            this.listAuditoriums.Location = new System.Drawing.Point(763, 58);
             this.listAuditoriums.Margin = new System.Windows.Forms.Padding(2);
             this.listAuditoriums.Name = "listAuditoriums";
-            this.listAuditoriums.Size = new System.Drawing.Size(123, 82);
+            this.listAuditoriums.Size = new System.Drawing.Size(137, 82);
             this.listAuditoriums.TabIndex = 24;
             this.listAuditoriums.SelectedIndexChanged += new System.EventHandler(this.listAuditoriums_SelectedIndexChanged);
             // 
@@ -1780,7 +1783,7 @@
             this.label13.BackColor = System.Drawing.Color.LightCoral;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label13.Location = new System.Drawing.Point(768, 22);
+            this.label13.Location = new System.Drawing.Point(788, 22);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(93, 15);
@@ -2229,8 +2232,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnMenu.ResumeLayout(false);
             this.pnMenu.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.pnBack.ResumeLayout(false);
+            this.pnBack.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -2373,7 +2376,7 @@
         private System.Windows.Forms.Panel pnMenu;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pnBack;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;

@@ -137,6 +137,14 @@ namespace Server
                     {
                         bookings.Remove(message.Replace("Cancelled", "Selected"));
                         fetchMessage  = false;
+                    } else if (messageArr[1].Equals("Booked"))
+                    {
+                        fetchMessage = false; 
+
+                        for (int i = 1; i < messageArr.Length; i++)
+                        {
+                            bookings.Remove(message.Replace("Booked", "Selected"));
+                        }
                     }
 
                     if (!fetchMessage)
