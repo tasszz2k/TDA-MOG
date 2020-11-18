@@ -16,9 +16,10 @@ namespace DTA_Theater.view
     {
         BaseDAO baseDao = BaseDAO.getInstance();
         private string connString = BaseDAO.CnnString;
-        private int menuSelection = 1;
+        int menuSelection = 1;
         private DataSet dsEmployee;
         private DataSet dsMovie;
+        private BindingSource bs;
         public AdminForm()
         {
             InitializeComponent();
@@ -27,23 +28,63 @@ namespace DTA_Theater.view
         private void DemoAdminFormDTA_Load(object sender, EventArgs e)
         {
             //style dadaGridView
+            dataGridView.RowTemplate.Height = 100;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             //end style dadaGridView
             //this.FormBorderStyle = FormBorderStyle.None; // Assuming this code is in a method on your form
          
-            ManageEmpoyee();
+            ChangeMenu(1);
             SetFontAndColors();
         }
+
+        private void LoadPictureBox()
+        {
+
+            //create a DataGridView Image Column
+            DataGridViewImageColumn dgvImage = new DataGridViewImageColumn();
+            //set a header test to DataGridView Image Column
+            dgvImage.HeaderText = "Thumbnail";
+            dgvImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            dataGridView.Columns.Add(dgvImage);
+
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                int id = Convert.ToInt32(row.Cells[0].Value.ToString());
+                string imgPath = row.Cells["Thumnail_link"].Value.ToString();
+                row.Cells[7].Value = Image.FromFile("../../" + imgPath);
+            }
+
+            //delete img path row[6]
+            dataGridView.Columns[6].Visible = false;
+        }
+
 
         public void ManageMovie()
         {
             dsMovie = GetAllMovie();
-            dataGridView.DataSource = dsMovie.Tables[0];
+            //binding source
+            bs = new BindingSource();
+            bs.DataSource = dsMovie.Tables[0].DefaultView;
+            bindingNavigator.BindingSource = bs;
+
+            dataGridView.DataSource = bs;
+           
+            //dataGridView.RowTemplate.Height = 100;
+            LoadPictureBox();
         } 
         public void ManageEmpoyee()
         {
             dsEmployee = GetAllEmployee();
-            dataGridView.DataSource = dsEmployee.Tables[0];
+            //binding source
+            bs = new BindingSource();
+            bs.DataSource = dsEmployee.Tables[0].DefaultView;
+            bindingNavigator.BindingSource = bs;
+
+            dataGridView.DataSource = bs;
+
+          
+            //dataGridView.RowTemplate.Height = 100;
         }
 
 
@@ -214,14 +255,17 @@ namespace DTA_Theater.view
 
         public void ChangeMenu(int menuSelection)
         {
+            dataGridView.Columns.Clear();
             switch (menuSelection)
             {
                 case 1:
+                    this.menuSelection = 1;
                     pnlEmployee.BackColor = Color.FromArgb(0, 133, 137);
                     pnlMovie.BackColor = Color.FromArgb(51, 52, 78);
                     ManageEmpoyee();
                     break;
                 case 2:
+                    this.menuSelection = 2;
                     pnlMovie.BackColor = Color.FromArgb(0, 133, 137);
                     pnlEmployee.BackColor = Color.FromArgb(51, 52, 78);
                     ManageMovie();
@@ -247,6 +291,16 @@ namespace DTA_Theater.view
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             ChangeMenu(2);
+        }
+
+        private void dataGridView_AllowUserToAddRowsChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
+        {
+
         }
     }
 }
