@@ -27,7 +27,7 @@ namespace DTA_Theater
 
             //ScreeningDAO screeningDAO = new ScreeningDAO();
             //screeningDAO.SchedulingScreenings();
-
+            gvScreening.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             LoadMoviesList();
             LoadMoviesScreening();
         }
@@ -154,6 +154,34 @@ namespace DTA_Theater
                 cnn.Close();
             }
         }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+   
+
+            List<int> listMovieId = new List<int>();
+            String test = "";
+
+            foreach (DataRowView objDataRowView in lbMovie.SelectedItems)
+            {
+                listMovieId.Add(Convert.ToInt32(objDataRowView["id"]));
+                test += objDataRowView["id"].ToString();
+            }
+
+            ScreeningDAO dao = new ScreeningDAO();
+            DataSet dsScreen = dao.ViewScreenings(listMovieId);
+
+            gvScreening.DataSource = dsScreen.Tables[0];
+        }
+
+     
+            
+        
     }
     
 }

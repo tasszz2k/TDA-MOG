@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -87,6 +88,68 @@ namespace DTA_Theater.dal
             }
 
         }
+
+        public DataSet ViewScreenings(List<int> movieIdList)
+        {
+            using (var cnn = new SqlConnection(BaseDAO.cnnString))
+            {
+
+                //(1): SqlConnection
+                //SqlConnection cnn  = new SqlConnection(connString);
+
+                //(2): SqlCommand
+                string sqlSelect = @"	SELECT * FROM dbo.Screening WHERE Movie_id IN (";
+                if (movieIdList.Count > 0)
+                {
+                   
+                    foreach (int movieId in movieIdList)
+                    {
+                        if (movieIdList[movieIdList.Count - 1] == movieId)
+                        {
+                            sqlSelect +=  movieId + ")";
+                        }
+                        else
+                        {
+                            sqlSelect +=  movieId + ",";
+                        }
+                    }
+                }
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cnn;
+                cmd.CommandType = CommandType.Text;
+                //setvalue
+                //cmd.Parameters.AddWithValue("@date", date);
+
+                cmd.CommandText = sqlSelect;
+
+                //(3): SqlDataAdapter
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                //(4): Init DataSet
+                DataSet ds = new DataSet();
+                try
+                {
+                    //Open connection
+                    cnn.Open();
+                    //fill data to ds
+                    da.Fill(ds);
+                }
+                catch (SqlException ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    //close connection
+                    cnn.Close();
+                }
+
+                return ds;
+            }
+
+        }
     }
+
+
 
 }

@@ -33,17 +33,18 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbMovie = new System.Windows.Forms.ListBox();
+            this.btnView = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvScreening)).BeginInit();
             this.SuspendLayout();
             // 
             // gvScreening
             // 
             this.gvScreening.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvScreening.Location = new System.Drawing.Point(317, 105);
+            this.gvScreening.Location = new System.Drawing.Point(438, 105);
             this.gvScreening.Name = "gvScreening";
             this.gvScreening.RowHeadersWidth = 51;
             this.gvScreening.RowTemplate.Height = 24;
-            this.gvScreening.Size = new System.Drawing.Size(471, 393);
+            this.gvScreening.Size = new System.Drawing.Size(766, 393);
             this.gvScreening.TabIndex = 0;
             // 
             // btnArrange
@@ -70,11 +71,12 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(248, 32);
+            this.label1.Location = new System.Drawing.Point(369, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(292, 36);
             this.label1.TabIndex = 3;
             this.label1.Text = "Screening Manager";
+            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // lbMovie
             // 
@@ -83,14 +85,25 @@
             this.lbMovie.Location = new System.Drawing.Point(21, 105);
             this.lbMovie.Name = "lbMovie";
             this.lbMovie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbMovie.Size = new System.Drawing.Size(290, 308);
+            this.lbMovie.Size = new System.Drawing.Size(411, 308);
             this.lbMovie.TabIndex = 4;
+            // 
+            // btnView
+            // 
+            this.btnView.Location = new System.Drawing.Point(317, 419);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(115, 78);
+            this.btnView.TabIndex = 5;
+            this.btnView.Text = "View Screening";
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // ScreeningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 528);
+            this.ClientSize = new System.Drawing.Size(1216, 528);
+            this.Controls.Add(this.btnView);
             this.Controls.Add(this.lbMovie);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnUpdate);
@@ -112,6 +125,7 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lbMovie;
+        private System.Windows.Forms.Button btnView;
     }
 }
 

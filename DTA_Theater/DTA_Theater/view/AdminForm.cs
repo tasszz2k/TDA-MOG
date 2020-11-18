@@ -28,7 +28,7 @@ namespace DTA_Theater.view
         private void DemoAdminFormDTA_Load(object sender, EventArgs e)
         {
             //style dadaGridView
-            dataGridView.RowTemplate.Height = 100;
+            //dataGridView.RowTemplate.Height = 100;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             //end style dadaGridView
             //this.FormBorderStyle = FormBorderStyle.None; // Assuming this code is in a method on your form
@@ -62,6 +62,7 @@ namespace DTA_Theater.view
 
         public void ManageMovie()
         {
+            dataGridView.RowTemplate.Height = 100;
             dsMovie = GetAllMovie();
             //binding source
             bs = new BindingSource();
@@ -69,12 +70,14 @@ namespace DTA_Theater.view
             bindingNavigator.BindingSource = bs;
 
             dataGridView.DataSource = bs;
-           
-            //dataGridView.RowTemplate.Height = 100;
+
+         
             LoadPictureBox();
         } 
         public void ManageEmpoyee()
         {
+            dataGridView.RowTemplate.Height = 50;
+
             dsEmployee = GetAllEmployee();
             //binding source
             bs = new BindingSource();
@@ -83,8 +86,7 @@ namespace DTA_Theater.view
 
             dataGridView.DataSource = bs;
 
-          
-            //dataGridView.RowTemplate.Height = 100;
+
         }
 
 
@@ -270,6 +272,18 @@ namespace DTA_Theater.view
                     pnlEmployee.BackColor = Color.FromArgb(51, 52, 78);
                     ManageMovie();
                     break;
+                case 3:
+                    this.menuSelection = 3;
+                    //this.Hide();
+
+                    //Replace this to perform task
+                    ScreeningForm cl = new ScreeningForm();
+
+                    if (cl.ShowDialog() == DialogResult.Cancel)
+                    {
+                        ChangeMenu(1);
+                    };
+                    break;
             }
         }
 
@@ -301,6 +315,21 @@ namespace DTA_Theater.view
         private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            ChangeMenu(3);
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            ChangeMenu(3);
+        }
+
+        private void pnlScreening_Click(object sender, EventArgs e)
+        {
+            ChangeMenu(3);
         }
     }
 }
