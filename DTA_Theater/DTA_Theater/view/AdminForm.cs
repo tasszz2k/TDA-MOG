@@ -52,7 +52,7 @@ namespace DTA_Theater.view
             {
                 int id = Convert.ToInt32(row.Cells[0].Value.ToString());
                 string imgPath = row.Cells["Thumnail_link"].Value.ToString();
-                row.Cells[7].Value = Image.FromFile("../../" + imgPath);
+                row.Cells[7].Value = Image.FromFile("../../images/" + imgPath);
             }
 
             //delete img path row[6]
@@ -262,27 +262,35 @@ namespace DTA_Theater.view
             {
                 case 1:
                     this.menuSelection = 1;
-                    pnlEmployee.BackColor = Color.FromArgb(0, 133, 137);
+                    pnlEmployee.BackColor = Color.FromArgb(0, 133, 137);//selected
                     pnlMovie.BackColor = Color.FromArgb(51, 52, 78);
+                    pnlScreening.BackColor = Color.FromArgb(51, 52, 78);
                     ManageEmpoyee();
+                    lblHeader.Text = "Employee Management";
                     break;
                 case 2:
                     this.menuSelection = 2;
                     pnlMovie.BackColor = Color.FromArgb(0, 133, 137);
                     pnlEmployee.BackColor = Color.FromArgb(51, 52, 78);
+                    pnlScreening.BackColor = Color.FromArgb(51, 52, 78);
                     ManageMovie();
+                    lblHeader.Text = "Movie Management";
                     break;
                 case 3:
+                    lblHeader.Text = "Screening Management";
                     this.menuSelection = 3;
                     //this.Hide();
-
-                    //Replace this to perform task
+                    pnlEmployee.BackColor = Color.FromArgb(51, 52, 78);
+                    pnlMovie.BackColor = Color.FromArgb(51, 52, 78);
+                    pnlScreening.BackColor = Color.FromArgb(0, 133, 137);
+                    //show other form
                     ScreeningForm cl = new ScreeningForm();
 
                     if (cl.ShowDialog() == DialogResult.Cancel)
                     {
                         ChangeMenu(1);
                     };
+                   
                     break;
             }
         }
@@ -330,6 +338,183 @@ namespace DTA_Theater.view
         private void pnlScreening_Click(object sender, EventArgs e)
         {
             ChangeMenu(3);
+        }
+
+        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+        {
+            switch (menuSelection)
+            {
+                case 1://employee
+                    InsertOrUpdateEmployee(1);
+                   
+                    break;
+
+                case 2://movie
+                    InsertOrUpdateMovie(1);
+                    break;
+            }
+        }
+
+        private void InsertOrUpdateEmployee(int mode)
+        {
+            switch (mode)
+            {
+                case 1://insert
+                    //show other form
+                    using (InsertUpdateEmployeeForm form = new InsertUpdateEmployeeForm())
+                    {
+                        if (form.ShowDialog() == DialogResult.Cancel)
+                        {
+                            ChangeMenu(1);
+                        };
+                    }
+                    break;
+                case 2://update
+                    if (dataGridView.SelectedRows.Count > 0)
+                    {
+
+                            int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells["Id"].Value.ToString());
+                            //show other form
+                            using (InsertUpdateEmployeeForm form = new InsertUpdateEmployeeForm(id))
+                            {
+                                if (form.ShowDialog() == DialogResult.Cancel)
+                                {
+                                    ChangeMenu(1);
+                                };
+                            }
+
+                    }
+                  
+
+                    break;
+            }
+        } 
+        private void InsertOrUpdateMovie(int choice)
+        {
+            switch (choice)
+            {
+                case 1://insert
+                    //show other form
+                    using (InsertUpdateMovieForm form = new InsertUpdateMovieForm())
+                    {
+                        if (form.ShowDialog() == DialogResult.Cancel)
+                        {
+                            ChangeMenu(2);
+                        };
+                    }
+                    break;
+                case 2://update
+                    if (dataGridView.SelectedRows.Count > 0)
+                    {
+
+                        int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells["Id"].Value.ToString());
+                        //show other form
+                        using (InsertUpdateMovieForm form = new InsertUpdateMovieForm(id))
+                        {
+                            if (form.ShowDialog() == DialogResult.Cancel)
+                            {
+                                ChangeMenu(2);
+                            };
+                        }
+
+                    }
+
+                    break;
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            switch (menuSelection)
+            {
+                case 1:
+                    InsertOrUpdateEmployee(2);
+
+                    break;
+                case 2:
+                    InsertOrUpdateMovie(2);
+                    break;
+            }
+
+        }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+
+        private void DeleteEmployeeById(int id)
+        {
+            using (var cnn = new SqlConnection(connString))
+            {
+                cnn.Open();
+                //(1): SqlConnection
+                //SqlConnection cnn  = new SqlConnection(connString);
+
+                //(2): SqlCommand
+                string sqlSelect = "DELETE dbo.Account WHERE id = @id";
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cnn;
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.CommandText = sqlSelect;
+
+                cmd.ExecuteNonQuery();
+
+            }
+        }
+
+        private void DeleteMovieById(int id)
+        {
+            using (var cnn = new SqlConnection(connString))
+            {
+                cnn.Open();
+                //(1): SqlConnection
+                //SqlConnection cnn  = new SqlConnection(connString);
+
+                //(2): SqlCommand
+                string sqlSelect = "DELETE dbo.Movie WHERE id = @id";
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cnn;
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.CommandText = sqlSelect;
+
+                cmd.ExecuteNonQuery();
+
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            
+
+            if (dataGridView.SelectedRows.Count > 0)
+            {
+                if (MessageBox.Show("Are you sure you want to delete this record?", "Delete", MessageBoxButtons.YesNo) ==
+                    DialogResult.Yes)
+                {
+
+                    int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells["Id"].Value.ToString());
+                    switch (menuSelection)
+                    {
+                        case 1:
+                            DeleteEmployeeById(id);
+                            MessageBox.Show("Delete Successfully!");
+                            ChangeMenu(1);
+
+                            break;
+                        case 2:
+                            DeleteMovieById(id);
+                            MessageBox.Show("Delete Successfully!");
+                            ChangeMenu(2);
+                            break;
+                    }
+                  
+                }
+               
+            }
         }
     }
 }

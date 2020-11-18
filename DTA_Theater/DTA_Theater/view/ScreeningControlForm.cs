@@ -30,6 +30,16 @@ namespace DTA_Theater
             gvScreening.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             LoadMoviesList();
             LoadMoviesScreening();
+            SetFontAndColors();
+        }
+
+        private void SetFontAndColors()
+        {
+            this.gvScreening.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
+            this.gvScreening.DefaultCellStyle.ForeColor = Color.DimGray;
+            this.gvScreening.DefaultCellStyle.BackColor = Color.Beige;
+            this.gvScreening.DefaultCellStyle.SelectionForeColor = Color.Yellow;
+            this.gvScreening.DefaultCellStyle.SelectionBackColor = Color.DimGray;
         }
         private void LoadMoviesList()
         {

@@ -80,6 +80,18 @@
     <Compile Include="view\FoodOrderForm.Designer.cs">
       <DependentUpon>FoodOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\InsertUpdateEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\InsertUpdateEmployeeForm.Designer.cs">
+      <DependentUpon>InsertUpdateEmployeeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\InsertUpdateMovieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\InsertUpdateMovieForm.Designer.cs">
+      <DependentUpon>InsertUpdateMovieForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +121,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\FoodOrderForm.resx">
       <DependentUpon>FoodOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\InsertUpdateEmployeeForm.resx">
+      <DependentUpon>InsertUpdateEmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\InsertUpdateMovieForm.resx">
+      <DependentUpon>InsertUpdateMovieForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

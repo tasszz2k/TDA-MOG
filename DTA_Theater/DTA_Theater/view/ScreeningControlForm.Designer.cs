@@ -49,29 +49,34 @@
             // 
             // btnArrange
             // 
+            this.btnArrange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(133)))), ((int)(((byte)(137)))));
+            this.btnArrange.ForeColor = System.Drawing.Color.White;
             this.btnArrange.Location = new System.Drawing.Point(21, 419);
             this.btnArrange.Name = "btnArrange";
             this.btnArrange.Size = new System.Drawing.Size(154, 79);
             this.btnArrange.TabIndex = 2;
             this.btnArrange.Text = "Arrange Screenig Schedule";
-            this.btnArrange.UseVisualStyleBackColor = true;
+            this.btnArrange.UseVisualStyleBackColor = false;
             this.btnArrange.Click += new System.EventHandler(this.btnArrange_Click);
             // 
             // btnUpdate
             // 
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(133)))), ((int)(((byte)(137)))));
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
             this.btnUpdate.Location = new System.Drawing.Point(181, 419);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(130, 78);
             this.btnUpdate.TabIndex = 2;
             this.btnUpdate.Text = "Delete OverScreening";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(369, 37);
+            this.label1.ForeColor = System.Drawing.Color.LightCoral;
+            this.label1.Location = new System.Drawing.Point(448, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(292, 36);
             this.label1.TabIndex = 3;
@@ -80,28 +85,33 @@
             // 
             // lbMovie
             // 
+            this.lbMovie.BackColor = System.Drawing.Color.Beige;
+            this.lbMovie.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMovie.FormattingEnabled = true;
-            this.lbMovie.ItemHeight = 16;
+            this.lbMovie.ItemHeight = 25;
             this.lbMovie.Location = new System.Drawing.Point(21, 105);
             this.lbMovie.Name = "lbMovie";
-            this.lbMovie.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lbMovie.Size = new System.Drawing.Size(411, 308);
+            this.lbMovie.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbMovie.Size = new System.Drawing.Size(411, 304);
             this.lbMovie.TabIndex = 4;
             // 
             // btnView
             // 
+            this.btnView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(133)))), ((int)(((byte)(137)))));
+            this.btnView.ForeColor = System.Drawing.Color.White;
             this.btnView.Location = new System.Drawing.Point(317, 419);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(115, 78);
             this.btnView.TabIndex = 5;
             this.btnView.Text = "View Screening";
-            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.UseVisualStyleBackColor = false;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // ScreeningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(52)))), ((int)(((byte)(78)))));
             this.ClientSize = new System.Drawing.Size(1216, 528);
             this.Controls.Add(this.btnView);
             this.Controls.Add(this.lbMovie);
