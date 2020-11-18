@@ -18,6 +18,7 @@ namespace DTA_Theater.view
         private string connString = BaseDAO.CnnString;
         private int menuSelection = 1;
         private DataSet dsEmployee;
+        private DataSet dsMovie;
         public AdminForm()
         {
             InitializeComponent();
@@ -29,11 +30,22 @@ namespace DTA_Theater.view
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             //end style dadaGridView
             //this.FormBorderStyle = FormBorderStyle.None; // Assuming this code is in a method on your form
-            dsEmployee = GetAllEmployee();
-            dataGridView.DataSource = dsEmployee.Tables[0];
-
+         
+            ManageEmpoyee();
             SetFontAndColors();
         }
+
+        public void ManageMovie()
+        {
+            dsMovie = GetAllMovie();
+            dataGridView.DataSource = dsMovie.Tables[0];
+        } 
+        public void ManageEmpoyee()
+        {
+            dsEmployee = GetAllEmployee();
+            dataGridView.DataSource = dsEmployee.Tables[0];
+        }
+
 
         private void SetFontAndColors()
         {
@@ -143,6 +155,47 @@ namespace DTA_Theater.view
             }
         }
 
+        private DataSet GetAllMovie()
+        {
+            using (var cnn = new SqlConnection(connString))
+            {
+
+                //(1): SqlConnection
+                //SqlConnection cnn  = new SqlConnection(connString);
+
+                //(2): SqlCommand
+                string sqlSelect = @"SELECT * FROM dbo.Movie";
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cnn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sqlSelect;
+
+                //(3): SqlDataAdapter
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                //(4): Init DataSet
+                DataSet ds = new DataSet();
+                try
+                {
+                    //Open connection
+                    cnn.Open();
+                    //fill data to ds
+                    da.Fill(ds);
+                }
+                catch (SqlException ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    //close connection
+                    cnn.Close();
+                }
+
+                return ds;
+            }
+        }
+
         private void pnlMovie_Paint(object sender, PaintEventArgs e)
         {
 
@@ -166,11 +219,12 @@ namespace DTA_Theater.view
                 case 1:
                     pnlEmployee.BackColor = Color.FromArgb(0, 133, 137);
                     pnlMovie.BackColor = Color.FromArgb(51, 52, 78);
+                    ManageEmpoyee();
                     break;
                 case 2:
                     pnlMovie.BackColor = Color.FromArgb(0, 133, 137);
                     pnlEmployee.BackColor = Color.FromArgb(51, 52, 78);
-               
+                    ManageMovie();
                     break;
             }
         }
