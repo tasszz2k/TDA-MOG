@@ -55,7 +55,7 @@ namespace DTA_Theater.view
                     nudDuration.Value = Convert.ToDecimal(dsMovie.Tables[0].Rows[0]["Duration_min"].ToString());
                     lblPath.Text = dsMovie.Tables[0].Rows[0]["Thumnail_link"].ToString();
                     pictureBoxThumbnail.Text = dsMovie.Tables[0].Rows[0]["Thumnail_link"].ToString();
-                    pictureBoxThumbnail.Image = Image.FromFile("../../images/" + pictureBoxThumbnail.Text);
+                    pictureBoxThumbnail.Image = Image.FromFile("../../" + pictureBoxThumbnail.Text);
                     break;
             }
         }
@@ -247,7 +247,8 @@ namespace DTA_Theater.view
                 // display image in picture box  
                 pictureBoxThumbnail.Image = new Bitmap(open.FileName);
                 // image file path  
-                pictureBoxThumbnail.Text = open.SafeFileName;
+                string fileName = open.SafeFileName;
+                pictureBoxThumbnail.Text = "images/" + fileName;
                 lblPath.Text = pictureBoxThumbnail.Text;
             }
         }

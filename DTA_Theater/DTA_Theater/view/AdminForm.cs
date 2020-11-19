@@ -52,7 +52,7 @@ namespace DTA_Theater.view
             {
                 int id = Convert.ToInt32(row.Cells[0].Value.ToString());
                 string imgPath = row.Cells["Thumnail_link"].Value.ToString();
-                row.Cells[7].Value = Image.FromFile("../../images/" + imgPath);
+                row.Cells[7].Value = Image.FromFile("../../" + imgPath);
             }
 
             //delete img path row[6]
